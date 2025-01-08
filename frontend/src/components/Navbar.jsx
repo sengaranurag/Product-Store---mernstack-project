@@ -1,7 +1,7 @@
 import { Button, Container, Flex, HStack, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { PlusSquareIcon } from "@chakra-ui/icons";
+import { TfiUser } from "react-icons/tfi";
 import { IoMoon } from "react-icons/io5";
 import { LuSun } from "react-icons/lu";
 
@@ -31,9 +31,9 @@ const Navbar = () => {
 				</Text>
 
 				<HStack spacing={2} alignItems={"centre"}>
-					<Link to={"/create"}>
+					<Link to={"/login"}>
 						<Button>
-							<PlusSquareIcon fontSize={20} />
+							<TfiUser fontSize={20} />
 						</Button>
 					</Link>
 					<Button onClick={toggleColorMode}>

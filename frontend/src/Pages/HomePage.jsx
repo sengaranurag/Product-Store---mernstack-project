@@ -1,10 +1,18 @@
-import { Container, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { Container, SimpleGrid, Text, VStack , Button, HStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useProductStore } from "../store/product";
 import { useEffect } from "react";
 import ProductCard from "../components/ProductCard";
+import { useNavigate } from "react-router-dom";
+
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAdmin"); // Clear admin login state
+    navigate("/login");
+  };
   const { fetchProduct, products } = useProductStore();
 
   useEffect (() => {
@@ -42,15 +50,22 @@ const HomePage = () => {
 
         {products.length == 0 && (
           <Text fontSize='xl' textAlign={"center"} fontWeight='bold' color='gray.500'>
-          No Products Found 😢{" "}
+          No Products Added 😢{" "}
           <Link to={"/create"}>
             <Text as= 'span' color='blue.500' _hover={{textDecoration:"underline",textShadow:"0px 8px 15px rgba(55,117,203,0.7)"}}>
-              Create a Product
+              Create a Product!
             </Text>
           </Link>
         </Text>
         )}
-
+        <HStack spacing={4}>
+          <Button colorScheme="blue" onClick={() => navigate("/create")} _hover={{ transform: "translateY(-5px)", shadow: "xl"}}>
+            New Product
+          </Button>
+          <Button colorScheme="red"  onClick={handleLogout} _hover={{ transform: "translateY(-5px)", shadow: "xl"}}>
+            Logout
+          </Button>
+        </HStack>
       </VStack>
     </Container>
   )
